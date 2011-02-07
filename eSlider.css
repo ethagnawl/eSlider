@@ -4,13 +4,8 @@
 #slideshow li { clear:none; float:left; height:89px; overflow:hidden; margin-right:26px; width:116px; }
 #slideshow li.last { margin-right:0; }
 #slideshow img { display:none; width:116px; }
-.loading { background-color:#999; filter:alpha(opacity=1); opacity:0.1; }
+.loading { background-color:#999; filter:alpha(opacity=1); opacity:.1; }
 #arrow_left,
-	#arrow_right { background-color:transparent; position:absolute; top:95px; }
+	#arrow_right { background-color:transparent; cursor:pointer; position:absolute; top:95px; }
 #arrow_left { left:0; }
 #arrow_right { right:0; }
-#arrow_left:focus,
-    #arrow_left:hover,
-        #arrow_right:focus,
-            #arrow_right:hover { cursor:pointer; }
-
