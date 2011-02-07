@@ -1,0 +1,16 @@
+#slideshow { clear:both; height:114px; overflow-x:hidden; margin:140px auto 0; position:relative; width:968px; }
+#slideshow .slideshow-inner { float:left; position:absolute; left:0; top:0; width:968px; }
+#slideshow ul { clear:none; float:left; width:968px; }
+#slideshow li { clear:none; float:left; height:89px; overflow:hidden; margin-right:26px; width:116px; }
+#slideshow li.last { margin-right:0; }
+#slideshow img { display:none; width:116px; }
+.loading { background-color:#999; /*opacity:0.1;*/ }
+#arrow_left,
+	#arrow_right { background-color:transparent; position:absolute; top:95px; }
+#arrow_left { left:0; }
+#arrow_right { right:0; }
+#arrow_left:focus,
+    #arrow_left:hover,
+        #arrow_right:focus,
+            #arrow_right:hover { cursor:pointer; }
+
