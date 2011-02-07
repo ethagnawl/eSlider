@@ -1,10 +1,10 @@
 /*!
 *   eSlider jQuery Plugin
-*   V0.9
+*   V0.9.1
 *   ethagnawl@gmail.com
 *   http://ethagnawl.com/eSlider
-*   Copyright 2010, Pete Doherty
-*   Date: 09/19/10 13:52 (EDT)
+*   Copyright 2011, Pete Doherty
+*   Date: Mon Feb  7 02:48:06 EST 2011
 *
 *   eSlider is distributed under the terms of the GNU General Public License.
 *
