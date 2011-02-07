@@ -27,7 +27,6 @@
 *       key_nav: true,                                 -    enable keyboard (<-, ->) navigation
 *       fade_speed: 'fast'                             -    'slow', 'fast' or milliseconds - i.e. 1000
 *       left_arrow: 'prev',                            -    left arrow chars/words (i.e. '<', '<-', '-', 'left')
-*       opacity: .9,                                   -    slide opacity before img load
 *       per_page: 7,                                   -    photos per page; 7 is the default, .css may need to be tweaked to accomodate other set sizes 
 *       reset: false,                                  -    reset/scroll to beginning of slideshow or die 
 *       right_arrow: 'next',                           -    right arrow chars/words (i.e. '>', '->', '+', 'right')
