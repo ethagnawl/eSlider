@@ -69,7 +69,7 @@
             ,   on = 'on'
             ,   on_class = '.' + on
             ,   html_builder = function(e,i,a,c,t,ch){$e=document.createElement(e);if(i)$e.id=i;if(a)for(var key in a)if(a.hasOwnProperty(key))$e.setAttribute([key],a[key]);if(c)typeof c==='object'?$e.className=c.join(' '):$e.className=c;if(t)$e.appendChild(document.createTextNode(t));if(ch)if(!ch.length){$e.appendChild(ch);}else{for(var i=0;i<ch.length;i++)$e.appendChild(ch[i]);}return $e;}
-            ,   grab_imgs = function () {
+            ,   get_imgs = function () {
                     slide.count += 1;
                     if (slide.count === slide.pages) {
                         slide.fin = true;
@@ -80,11 +80,11 @@
                     }    
                     $.getJSON('http://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key='+config.api_key+'&photoset_id='+config.set_id+'&per_page='+config.per_page+'&page='+slide.count+'&format=json&jsoncallback=?', 
                         function (data) {
-                            var pages = data.photoset.pages, photos = data.photoset.photo;
+                            var photos = data.photoset.photo;
                             if (photos.length < config.per_page) {
                                 slide.fin = true;
                             }
-                            slide.pages = pages;
+                            slide.pages = data.photoset.pages;
                             $.each(photos, function (i, photo) {
                                 var li_id = ul_id + '_' + 'li' + '_' + i, img_id = ul_id + '_' + 'img' + '_' + i, img = new Image();
                                 img.id = img_id;
@@ -103,7 +103,6 @@
                 } 
             ,   $origin = $(this)
 	        ,   slide = {	
-			        // slider config
 			        count: 0,
                     fin: false,
                     auto_slider: function () {
@@ -120,8 +119,8 @@
 			        slide_left: function() {
 		                slide.last_ul = $origin.find(on_class).is(':last-child') ? true : false;
 			            if (slide.fin) {
-			                if (slide.last_ul) {
-    			                if (config.reset) {
+			                if (slide.last_ul) {    //  merge
+    			                if (config.reset) {    //  merge
     			                    slide.reset();
 			                    }
                             } else {
@@ -140,7 +139,7 @@
 				                        width: '+=' + slide.width
 			                        }, config.slide_speed, function () {
                                         $origin.find(on_class).removeClass(on);
-                                        grab_imgs();
+                                        get_imgs();
 			                        });
 			                    } else {
 	                                $slideshow_inner.animate({
@@ -157,7 +156,7 @@
                         }      
 		            },
 			        slide_right: function () {
-                        if (!$slideshow_inner.is(animated) && parseInt($slideshow_inner.css(left)) < 0) {	
+                        if (!$slideshow_inner.is(animated) && parseInt($slideshow_inner.css(left), 10) < 0) {	
 				            $origin.find(on_class).removeClass(on).prev().addClass(on);
 				            $slideshow_inner.animate({
 					            left: '+=' + slide.width,
@@ -171,14 +170,16 @@
 			        width: $origin.width()
 		        }
         ;
+
         $.extend(config, options);  // TODO: use vanilla solution
+
         if (config.auto_scroll && !isNaN(config.auto_scroll)) {
             var auto_scroll_caller = setTimeout(slide.slide_left, config.auto_scroll);
         }
         if (!$origin.children().length) {
             $([html_builder(button, arrow_left, 0, 0, config.left_arrow), html_builder(button, arrow_right, 0, 0, config.right_arrow), html_builder(div, 0, 0, slideshow_inner_class)]).appendTo($origin);
             var $slideshow_inner = $origin.find('.' + slideshow_inner_class);
-            grab_imgs();
+            get_imgs();
         }
         if (config.key_nav) {
             $(document).keyup(function (e) {
