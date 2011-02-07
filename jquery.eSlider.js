@@ -171,7 +171,11 @@
 		        }
         ;
 
-        $.extend(config, options);  // TODO: use vanilla solution
+        for (option in options) {
+            if (options.hasOwnProperty(option)) {
+                config[option] = options[option];
+            }
+        }
 
         if (config.auto_scroll && !isNaN(config.auto_scroll)) {
             var auto_scroll_caller = setTimeout(slide.slide_left, config.auto_scroll);
